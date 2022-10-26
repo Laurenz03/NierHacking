@@ -25,6 +25,8 @@ func _physics_process(delta):
 	global_rotation = atan2(velocity.x, -velocity.y)  #velocity is the normalized player position
 	velocity = velocity.normalized()
 	move_and_collide(velocity *speed *delta)
+	if get_tree().get_nodes_in_group("enemy").size() == 1:
+		$Sprite2.set_visible(false)
 
 func shoot():
 	var b = Bullet.instance()
@@ -32,8 +34,10 @@ func shoot():
 	b.transform = $Muzzle.global_transform
 
 func hit():
-	queue_free()
-	print_debug("you win")
+	if get_tree().get_nodes_in_group("enemy").size() == 1:
+		$Sprite2.set_visible(false)
+		queue_free()
+		print_debug("you win")
 
 
 func _on_Timer_timeout():
