@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://img/nierTiles.png" type="Texture" id=1]
+[ext_resource path="res://scenes/mainMenu.gd" type="Script" id=2]
+[ext_resource path="res://Kenney Pixel.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Menu"
+length = 15.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.9, 5, 5.1, 7.9, 9.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -110, 462 ), Vector2( 1108, 440 ), Vector2( 1066, -84 ), Vector2( -80, -47 ), Vector2( 1125, 677 ), Vector2( -118, 659 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5, 5.1, 9.8, 9.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0, 127.6, 127.6, 90.0 ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+font_data = ExtResource( 3 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Menu = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -110, 462 )
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 512, 300 )
+current = true
+
+[node name="Button" type="Button" parent="."]
+margin_left = 472.0
+margin_top = 280.0
+margin_right = 556.0
+margin_bottom = 325.0
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "play"
+icon_align = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

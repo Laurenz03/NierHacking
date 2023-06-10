@@ -27,6 +27,7 @@ func _physics_process(delta):
 	move_and_collide(velocity *speed *delta)
 	if get_tree().get_nodes_in_group("enemy").size() == 1:
 		$Sprite2.set_visible(false)
+		shielded = false
 
 func shoot():
 	var b = Bullet.instance()
@@ -34,8 +35,9 @@ func shoot():
 	b.transform = $Muzzle.global_transform
 
 func hit():
-	if get_tree().get_nodes_in_group("enemy").size() == 1:
-		$Sprite2.set_visible(false)
+	if shielded == false:
+		lives -= 1
+	if lives == 0:
 		queue_free()
 		print_debug("you win")
 
